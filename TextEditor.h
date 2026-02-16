@@ -11,7 +11,6 @@
 #include <unordered_set>
 #include <vector>
 
-
 class TextEditor {
 public:
   enum class PaletteIndex {
@@ -305,6 +304,12 @@ private:
     EditorState mAfter;
   };
 
+  friend class basic_code_editor;
+  friend class shader_editor;
+
+  inline void SetUndoRecordOn(bool aValue) { mUndoRecordOn = aValue; }
+  inline bool IsUndoRecordOn() const { return mUndoRecordOn; }
+
   typedef std::vector<UndoRecord> UndoBuffer;
 
   void ProcessInputs();
@@ -385,4 +390,5 @@ private:
   float mLastClick;
 
   std::function<bool(void)> mKeyPressedCallback;
+  bool mUndoRecordOn = true;
 };
