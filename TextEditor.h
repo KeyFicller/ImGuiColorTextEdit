@@ -264,6 +264,10 @@ public:
     mKeyPressedCallback = aCallback;
   }
 
+  void SetMouseScrolledCallback(std::function<bool(void)> aCallback) {
+    mMouseScrolledCallback = aCallback;
+  }
+
 private:
   typedef std::vector<std::pair<std::regex, PaletteIndex>> RegexList;
 
@@ -390,5 +394,6 @@ private:
   float mLastClick;
 
   std::function<bool(void)> mKeyPressedCallback;
+  std::function<bool(void)> mMouseScrolledCallback;
   bool mUndoRecordOn = true;
 };
