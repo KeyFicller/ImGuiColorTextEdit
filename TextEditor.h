@@ -268,6 +268,11 @@ public:
     mMouseScrolledCallback = aCallback;
   }
 
+  bool LastOperationIsDelete() const {
+    return mUndoIndex > 0 && mUndoBuffer[mUndoIndex - 1].mAdded.empty() &&
+           !mUndoBuffer[mUndoIndex - 1].mRemoved.empty();
+  }
+
 private:
   typedef std::vector<std::pair<std::regex, PaletteIndex>> RegexList;
 
