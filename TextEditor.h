@@ -268,6 +268,13 @@ public:
     mMouseScrolledCallback = aCallback;
   }
 
+  /// ImGui multiplies layout & GetFontSize() via SetWindowFontScale on the scrolling
+  /// editor child window (must not be applied only an outer wrapper).
+  void SetViewportFontScale(float scale) {
+    mViewportFontScale = (scale > 1e-4f && scale < 1000.f) ? scale : 1.0f;
+  }
+  float GetViewportFontScale() const { return mViewportFontScale; }
+
   bool LastOperationIsDelete() const {
     return mUndoIndex > 0 && mUndoBuffer[mUndoIndex - 1].mAdded.empty() &&
            !mUndoBuffer[mUndoIndex - 1].mRemoved.empty();
@@ -400,5 +407,6 @@ private:
 
   std::function<bool(void)> mKeyPressedCallback;
   std::function<bool(void)> mMouseScrolledCallback;
+  float mViewportFontScale = 1.0f;
   bool mUndoRecordOn = true;
 };

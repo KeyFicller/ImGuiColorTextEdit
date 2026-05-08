@@ -1101,6 +1101,8 @@ void TextEditor::Render(const char *aTitle, const ImVec2 &aSize, bool aBorder) {
                           ImGuiWindowFlags_AlwaysHorizontalScrollbar |
                           ImGuiWindowFlags_NoMove);
 
+  ImGui::SetWindowFontScale(mViewportFontScale);
+
   if (mHandleKeyboardInputs) {
     HandleKeyboardInputs();
     ImGui::PushItemFlag(ImGuiItemFlags_NoTabStop, false);
@@ -1114,6 +1116,8 @@ void TextEditor::Render(const char *aTitle, const ImVec2 &aSize, bool aBorder) {
 
   if (mHandleKeyboardInputs)
     ImGui::PopItemFlag();
+
+  ImGui::SetWindowFontScale(1.0f);
 
   if (!mIgnoreImGuiChild)
     ImGui::EndChild();
